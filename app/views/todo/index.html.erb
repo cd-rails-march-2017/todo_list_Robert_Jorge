@@ -1,0 +1,23 @@
+<h1>Ghettonote</h1>
+
+<% @todos.each do |todo| %>
+  <form action="/todo/update/<%= todo.id %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <p>Title: <%= todo.title %></p>
+    <p>Due Date: <%= todo.date %></p>
+    Completed: <%= todo.completed %>
+    <input type="hidden" name="completed" value="<%= !todo.completed %>">
+    <input class="btn btn-default" type="submit" name="" value="x">
+  </form>
+<%end%>
+
+
+  <br>
+  <br>
+
+<a href="/todo/create">Create</a>
+<% if session[:state] != 'true' %>
+  <a href="/todo/toggle_hidden/true">Hide Completed</a>
+<% else %>
+  <a href="/todo/toggle_hidden/false">Show All</a>
+<% end %>
